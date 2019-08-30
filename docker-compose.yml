@@ -1,0 +1,35 @@
+version: '2.3'
+services:
+
+  jupyter:
+    image: tensorflow/tensorflow:latest-py3
+    container_name: facebox-notebooks
+    runtime: nvidia
+    ports:
+      - "${JUPYTER_PORT}:8888"
+    working_dir: /app/notebooks
+    volumes:
+      - .:/app:ro
+      - ./notebooks:/app/notebooks
+      - ./src:/app/src
+    command: make run
+    restart: always
+    stdin_open: true
+    tty: true
+
+  mongodb:
+    image: mongo
+    container_name: facebox-database
+    ports:
+      - "${MONGODB_PORT}:27017"
+    volumes:
+      - data-volume:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
+    restart: always
+    stdin_open: true
+    tty: true
+
+volumes:
+  data-volume:
