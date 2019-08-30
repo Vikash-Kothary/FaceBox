@@ -5,7 +5,7 @@ repository:
 
   description: description of repo
 
-  homepage: https://example.github.io/
+  homepage: https://Tej780.github.io/FaceBox
 
   private: false
 
@@ -37,8 +37,48 @@ collaborators:
 
   - username: Tej780
 
-    permission: push
+    permission: admin
 
   - username: VikashKothary
 
-    permission: push
+    permission: admin
+
+branches:
+  - name: master
+    protection:
+      required_pull_request_reviews:
+        required_approving_review_count: 1
+        dismiss_stale_reviews: true
+        require_code_owner_reviews: true
+        # Specify which users and teams can dismiss pull request reviews. Pass an empty dismissal_restrictions object to disable. User and team dismissal_restrictions are only available for organization-owned repositories. Omit this parameter for personal repositories.
+        dismissal_restrictions:
+          users: []
+          teams: []
+      required_status_checks:
+        strict: true
+        # Required. The list of status checks to require in order to merge into this branch
+        contexts: []
+      # Required. Enforce all configured restrictions for administrators. Set to true to enforce required status checks for repository administrators. Set to null to disable.
+      enforce_admins: true
+      # Required. Restrict who can push to this branch. Team and user restrictions are only available for organization-owned repositories. Set to null to disable.
+      restrictions:
+        users: []
+        teams: []
+
+  - name: develop
+    protection:
+      required_pull_request_reviews:
+        required_approving_review_count: 1
+        dismiss_stale_reviews: true
+        require_code_owner_reviews: true
+        dismissal_restrictions:
+          users: []
+          teams: []
+      required_status_checks:
+        strict: true
+        contexts: []
+      enforce_admins: false
+      # Required. Restrict who can push to this branch. Team and user restrictions are only available for organization-owned repositories. Set to null to disable.
+      restrictions:
+        users: []
+        teams: []
